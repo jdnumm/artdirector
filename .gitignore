@@ -1,4 +1,4 @@
-./__pycache__/
-./env/
-./dist/
-./artdirector.egg-info/
+__pycache__/*
+env/*
+dist/*
+artdirector.egg-info/*

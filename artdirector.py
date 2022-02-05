@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+
 from PIL import (
         Image,
         ImageFilter,
@@ -22,7 +23,7 @@ class ArtDirector(object):
     def get_pil_image(self):
         return self.image
 
-    def crop(self, size, focus=None, zoom=0 ,auto=True, filter=False):
+    def crop(self, size, focus=None, zoom=0.0, edge=3.0):
 
         src_width, src_height = self.image.size
         dst_width, dst_height = size
@@ -42,7 +43,7 @@ class ArtDirector(object):
             crop_width = src_width
             crop_height = crop_width / ratio
             x_offset = 0
-            y_offset = float(src_height - crop_height) / 3
+            y_offset = float(src_height - crop_height) / 2
 
         crop_height = crop_height-crop_height*zoom
         crop_width = crop_width-crop_width*zoom
@@ -51,16 +52,16 @@ class ArtDirector(object):
             focus_x, focus_y = focus
             x_end = x_offset+crop_width
             # Move crop window to the right
-            while focus_x >= x_offset+crop_width/2 and x_offset+crop_width < src_width :
+            while focus_x >= x_offset+crop_width/edge and x_offset+crop_width < src_width :
                 x_offset = x_offset+1
             # Move crop window to the left
-            while focus_x <= x_offset+crop_width/2 and x_offset > 0:
+            while focus_x <= x_offset+crop_width/edge and x_offset > 0:
                 x_offset = x_offset-1
             # Move crop window down
-            while focus_y >= y_offset+crop_height/2 and y_offset+crop_height <= src_height :
+            while focus_y >= y_offset+crop_height/edge and y_offset+crop_height <= src_height :
                 y_offset = y_offset+1
             # Move crop window up
-            while focus_y <= y_offset+crop_height/2 and y_offset > 0:
+            while focus_y <= y_offset+crop_height/edge and y_offset > 0:
                 y_offset = y_offset-1
 
 
@@ -80,9 +81,10 @@ def parse_arguments():
     parser.add_argument('outputfile', metavar='OUTPUT_FILE', help='Output image')
     parser.add_argument('--width', dest='width', type=int, default=100, help='Crop width')
     parser.add_argument('--height', dest='height', type=int, default=100, help='Crop height')
-    parser.add_argument('--focus-x', dest='focus_x', type=int, default=None, help='Focal point ')
-    parser.add_argument('--focus-y', dest='focus_y', type=int, default=None, help='Focal point')
-    parser.add_argument('--zoom', dest='zoom', type=float, default=0, help='Zoom between 0.0 - 1.0 (0.0. Default)')
+    parser.add_argument('--focus-x', dest='focus_x', default=None, type=int, help='Focal point ')
+    parser.add_argument('--focus-y', dest='focus_y', default=None, type=int, help='Focal point')
+    parser.add_argument('--zoom', dest='zoom', type=float, default=0.0, help='Zoom between 0.0 - 1.0 (0.0. Default)')
+    parser.add_argument('--edge', dest='edge', type=float, default=3.0, help='Edge (size/n) around the focal target area')
     return parser.parse_args()
 
 def main():
@@ -90,9 +92,9 @@ def main():
     ad = ArtDirector()
     ad.load(args.inputfile)
     if args.focus_x != None and args.focus_y != None:
-        ad.crop([args.width, args.height], focus=[args.focus_x, args.focus_y], zoom=args.zoom)
+        ad.crop([args.width, args.height], focus=[args.focus_x, args.focus_y], zoom=args.zoom, edge=args.edge)
     else:
-        ad.crop([args.width, args.height], zoom=args.zoom)
+        ad.crop([args.width, args.height], zoom=args.zoom, edge=args.edge)
 
     ad.save(args.outputfile)
 
