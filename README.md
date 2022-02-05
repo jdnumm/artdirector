@@ -4,7 +4,7 @@ Set a focal point and "artdirector" crop your image to different resolutions wit
 
 ## Example
 
-Original Image size.
+Original Image (by me)
 
 ![Original size](https://raw.githubusercontent.com/jdnumm/artdirector/main/example/example.jpeg)
 
