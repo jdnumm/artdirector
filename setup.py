@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="artdirector",
-    version="0.0.1",
+    version="0.0.2",
     author='Johannes Daniel Nümm',
     author_email='daniel.nuemm@blacktre.es',
     description='Crop your image to different resolutions without missing the subject.',
@@ -27,4 +27,5 @@ setuptools.setup(
     },
     python_requires=">=3.6",
     install_requires=['Pillow>=4.0.0'],
+    py_modules=['artdirector'],
 )
