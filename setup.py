@@ -22,7 +22,9 @@ setuptools.setup(
         'Intended Audience :: Developers',
         'Topic :: Utilities'
     ],
-    package_dir={"": "src"},
-    packages=setuptools.find_packages(where="src"),
+    entry_points={
+        'console_scripts': ['artdirector=artdirector:main']
+    },
     python_requires=">=3.6",
+    install_requires=['Pillow>=4.0.0'],
 )

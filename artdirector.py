@@ -80,9 +80,9 @@ def parse_arguments():
     parser.add_argument('outputfile', metavar='OUTPUT_FILE', help='Output image')
     parser.add_argument('--width', dest='width', type=int, default=100, help='Crop width')
     parser.add_argument('--height', dest='height', type=int, default=100, help='Crop height')
-    parser.add_argument('--focus-x', dest='focus_x', type=int, default=None, help='Crop height')
-    parser.add_argument('--focus-y', dest='focus_y', type=int, default=None, help='Crop height')
-    parser.add_argument('--zoom', dest='zoom', type=float, default=0, help='Crop height')
+    parser.add_argument('--focus-x', dest='focus_x', type=int, default=None, help='Focal point ')
+    parser.add_argument('--focus-y', dest='focus_y', type=int, default=None, help='Focal point')
+    parser.add_argument('--zoom', dest='zoom', type=float, default=0, help='Zoom between 0.0 - 1.0 (0.0. Default)')
     return parser.parse_args()
 
 def main():
