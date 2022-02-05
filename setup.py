@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.1",
     author='Johannes Daniel Nümm',
     author_email='daniel.nuemm@blacktre.es',
-    description='Art directed image cropping',
+    description='Crop your image to different resolutions without missing the subject.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/jdnumm/artdirector',
