@@ -57,5 +57,11 @@ from artdirector import ArtDirector
 ad = ArtDirector()
 ad.load('input.jpg')
 ad.crop([400, 400], focus=[600, 300], zoom=0.3)
-ad.output('input.jpg')
+ad.save('output.jpg')
+ad.filter_blur().filter_bw()
+ad.save('output-blur-bw.jpg')
+
+print(ad.image) # PIL Image
 ```
+
+

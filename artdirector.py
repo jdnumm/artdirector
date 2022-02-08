@@ -70,8 +70,12 @@ class ArtDirector(object):
 
         return self
 
-    def filter_blur(self, radius=50):
+    def filter_blur(self, radius=5):
         self.image = self.image.filter(ImageFilter.GaussianBlur(radius=radius))
+        return self
+
+    def filter_bw(self):
+        self.image = self.image.convert('L')
         return self
 
 
