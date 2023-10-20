@@ -66,7 +66,7 @@ class ArtDirector(object):
 
 
         self.image = self.image.crop((int(x_offset), int(y_offset), int(x_offset)+int(crop_width), int(y_offset)+int(crop_height)))
-        self.image = self.image.resize(size, Image.ANTIALIAS)
+        self.image = self.image.resize(size, Image.Resampling.LANCZOS)
 
         return self
 
